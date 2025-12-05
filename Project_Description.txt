@@ -1,0 +1,105 @@
+Project Title: Pump Control & Standby Automation using Siemens TIA Portal and PLCSIM
+Author: Nilesh Dabhade
+
+--------------------------------------------------------------------------------
+PROJECT OVERVIEW
+--------------------------------------------------------------------------------
+This project demonstrates an automated Pump Control system using Siemens TIA
+Portal (Ladder Logic) and PLCSIM for simulation. The system controls two primary
+pumps (Pump A and Pump B) and a standby pump C that automatically starts when any
+primary pump fails. The project also includes two-pump fault detection, alarm
+Light , interlocks, and safe shutdown conditions.
+
+The goal of this project is to show practical understanding of PLC programming,
+sequencing, fault handling, and real-world control logic used in industrial
+automation.
+
+--------------------------------------------------------------------------------
+MAIN FEATURES IMPLEMENTED
+--------------------------------------------------------------------------------
+1. START / STOP CONTROL
+   - Common Start command for enabling the entire pump system.
+   - Safe Stop push button to turn off all pumps and reset conditions.
+
+2. PUMP SEQUENCING LOGIC
+   - Pump A and Pump B run in sequence based on commands.
+   - Each pump has independent start and stop logic.
+   - Main Contactor signal (OUT_MainContactor) used to energize pumps.
+
+3. FAULT DETECTION
+   - Individual fault inputs for:
+       • Pump A (FLT_PumpA)
+       • Pump B (FLT_PumpB)
+       • Pump C / Standby Pump (FLT_PumpC)
+   - Fault conditions stored in internal memory bits.
+
+4. TWO PUMP FAULT LOGIC (FLT_TwoPumpFault)
+   - If any two pumps are in fault condition simultaneously:
+       • System triggers dual-fault alarm.
+       • Stops main contactor to prevent unsafe operation.
+       • Activates alarm lamp.
+
+5. STANDBY PUMP LOGIC
+   - Standby pump runs automatically when:
+       • Pump A or Pump B fails.
+       • Common start is active.
+       • No two-pump fault exists.
+   - If standby pump also fails → alarm and shutdown.
+
+6. ALARM BLINKING LOGIC
+   - Alarm lamp ON when:
+       • Two pump fault condition exists.
+   - Implemented using memory bits.
+
+--------------------------------------------------------------------------------
+TOOLS USED
+--------------------------------------------------------------------------------
+• Siemens TIA Portal (Ladder Logic)
+• Siemens PLCSIM (Simulation)
+• VN Video Editor (for demo video editing)
+
+--------------------------------------------------------------------------------
+TAG NAMING STANDARD USED
+--------------------------------------------------------------------------------
+The project follows professional, industry-style tag names such as:
+
+Inputs:
+PB_Start
+PB_Stop
+FLT_PumpA
+FLT_PumpB
+FLT_PumpC
+
+Outputs:
+OUT_PumpA_Run
+OUT_PumpB_Run
+OUT_StandbyPump_Run
+OUT_AlarmLamp
+OUT_MainContactor
+
+Internal Bits:
+CMD_CommonStart
+FLT_TwoPumpFault
+M_StandbyLogicEnabled
+
+
+--------------------------------------------------------------------------------
+PROJECT PURPOSE
+--------------------------------------------------------------------------------
+This project demonstrates:
+• Ability to design safe & reliable PLC logic.
+• Understanding of interlocks and sequencing.
+• Handling multiple pump operations.
+• Implementing standby pump logic.
+• Creating dual-fault safety conditions.
+• Structuring PLC tags using industry standards.
+• Documenting and demonstrating PLC projects professionally.
+
+--------------------------------------------------------------------------------
+DEMO VIDEO LINK
+--------------------------------------------------------------------------------
+(https://youtu.be/_0i8qIRqDuk?si=FUHAZNbsLl7Pt-AG)
+
+--------------------------------------------------------------------------------
+END OF DOCUMENT
+--------------------------------------------------------------------------------

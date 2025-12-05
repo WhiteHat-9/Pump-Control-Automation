@@ -1,0 +1,26 @@
+Standby Pump Logic Explanation
+------------------------------
+
+Purpose:
+- Ensure system continues operation by starting a standby pump if a primary pump fails.
+- Prevent automatic standby activation if a dual-pump fault exists.
+
+Logic Summary:
+1. Conditions to start Standby Pump (OUT_StandbyPump_Run):
+   - CMD_CommonStart is active
+   - (FLT_PumpA is active AND FLT_PumpB is NOT active) OR (FLT_PumpB is active AND FLT_PumpA is NOT active)
+   - FLT_TwoPumpFault is NOT active
+   - OUT_MainContactor is energized (system enabled)
+
+2. Conditions to stop Standby Pump:
+   - Manual STOP (PB_Stop)
+   - CMD_CommonStart becomes inactive
+   - FLT_TwoPumpFault becomes active
+   - Standby pump itself faults (FLT_PumpC)
+
+3. Sequence:
+   - On detection of single primary pump fault, set M_StandbyLogicEnabled
+   - Start OUT_StandbyPump_Run Run
+   - Monitor FLT_PumpC; if it faults, set FLT_TwoPumpFault if combined with another fault
+
+
